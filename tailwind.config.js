@@ -4,7 +4,11 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'courier': ['"Courier New"', 'monospace'], // Aggiungi la font-family qui
+      },
+    },
   },
   plugins: [],
 }
