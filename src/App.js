@@ -39,7 +39,7 @@ function App() {
       <main className='container mx-auto px-4'>
         <div className='grid place-content-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4'>
           {pokemon.map((poke) => (
-            <Card key={poke.name} pokemon={poke} />  // Usa il nome come chiave
+            <Card key={poke.name} pokemon={poke} />
           ))}
         </div>
       </main>

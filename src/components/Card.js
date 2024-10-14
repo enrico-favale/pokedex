@@ -3,7 +3,7 @@ import { getIdFromUrl } from '../api/pokemon';
 
 const Card = ({ pokemon }) => {
   const id = getIdFromUrl(pokemon.url);
-  const name = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
+  const name = pokemon.name;
   const sprite_url = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
   const shiny_sprite_url = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${id}.png`;
 
