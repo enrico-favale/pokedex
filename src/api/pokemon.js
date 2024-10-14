@@ -10,34 +10,29 @@ const BASE_URL = 'https://pokeapi.co/api/v2';
 export const fetchPokemonList = async (limit = 151, offset = 0) => {
   try {
     const response = await fetch(`${BASE_URL}/pokemon?limit=${limit}&offset=${offset}`);
+
     if (!response.ok) {
       throw new Error('Errore nel recupero della lista di Pokémon');
     }
+
     const data = await response.json();
     return data.results; // Ritorna solo la lista di Pokémon
+
   } catch (error) {
     console.error(error);
+
     return [];
   }
 };
 
 /**
- * Fetch dettagli di un singolo Pokémon.
- * @param {string} url - URL del Pokémon o il nome/id.
- * @returns {Promise<Object>} - Dettagli completi del Pokémon.
+ * Estrapola l'id dall'URL del Pokémon.
+ * @param {string} url - URL da cui estrarre l'ID.
+ * @returns {number} - L'ID del Pokémon estratto dall'URL.
  */
-export const fetchPokemonDetails = async (url) => {
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error('Errore nel recupero dei dettagli del Pokémon');
-    }
-    const data = await response.json();
-    return data; // Ritorna tutti i dettagli del Pokémon
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
+export const getIdFromUrl = (url) => {
+  const id = url.split("/")[6];  // Estrai l'ID dall'URL
+  return Number(id);  // Restituisce l'ID come numero
 };
 
 /**
@@ -48,13 +43,17 @@ export const fetchPokemonDetails = async (url) => {
 export const fetchPokemonByIdOrName = async (identifier) => {
   try {
     const response = await fetch(`${BASE_URL}/pokemon/${identifier}`);
+
     if (!response.ok) {
       throw new Error('Errore nel recupero del Pokémon');
     }
+
     const data = await response.json();
     return data;
+
   } catch (error) {
     console.error(error);
+
     return null;
   }
 };
