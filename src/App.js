@@ -1,5 +1,8 @@
 import './App.css';
 import Card from './components/Card';
+import PokemonDetail from './components/PokemonDetail';
+
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { fetchPokemonList } from './api/pokemon';
 
@@ -35,36 +38,53 @@ function App() {
   if (loading) return <p>Loading...</p>;
 
   return (
-    <div className='font-mono bg-bg_main text-txt_main min-h-screen'>
-      <header className='items-center flex justify-center p-6'>
-        <img src='white-pokeball.png' alt='pokeball' className='' />
-        <p className='text-5xl font-bold'>Pokedex</p>
-      </header>
+    <Router>
+      <div className='font-mono bg-bg_main text-txt_main min-h-screen'>
+        <header className='items-center flex justify-center p-6'>
+          <img src='white-pokeball.png' alt='pokeball' className='' />
+          <p className='text-5xl font-bold'>Pokedex</p>
+        </header>
 
-      <main className='container mx-auto px-4'>
-        {/* Barra di ricerca */}
-        <div className='mb-8 flex justify-center'>
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={handleSearch}  // Assegna la funzione di ricerca
-            placeholder="Search for a Pokemon..."
-            className="w-full max-w-lg px-2 py-1 text-center border-b-2 border-txt_secondary bg-inherit focus:outline-none focus:border-txt_main focus:text-txt_main"
-          />
-        </div>
+        <main className='container mx-auto px-4'>
+          {/* Barra di ricerca */}
 
-        {/* Griglia di carte */}
-        <div className='grid place-content-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4'>
-          {filteredPokemon.length > 0 ? (
-            filteredPokemon.map((poke) => (
-              <Card key={poke.name} pokemon={poke} />
-            ))
-          ) : (
-            <p className="text-center sm:col-span-2 md:col-span-2 lg:col-start-2 lg:col-span-2">No Pokémon found</p>  // Mostra un messaggio se nessun Pokémon corrisponde alla ricerca
-          )}
-        </div>
-      </main>
-    </div>
+
+          {/* Definiamo le rotte qui */}
+          <Routes>
+            {/* Rotta per la lista principale di Pokémon */}
+            <Route
+              path="/"
+              element={
+                <div>
+                  <div className='mb-8 flex justify-center'>
+                    <input
+                      type="text"
+                      value={searchQuery}
+                      onChange={handleSearch}  // Assegna la funzione di ricerca
+                      placeholder="Search for a Pokemon..."
+                      className="w-full max-w-lg px-2 py-1 text-center border-b-2 border-txt_secondary bg-inherit focus:outline-none focus:border-txt_main focus:text-txt_main"
+                    />
+                  </div>
+
+                  <div className='grid place-content-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4'>
+                    {filteredPokemon.length > 0 ? (
+                      filteredPokemon.map((poke) => (
+                        <Card key={poke.name} pokemon={poke} />
+                      ))
+                    ) : (
+                      <p className="text-center sm:col-span-2 md:col-span-2 lg:col-start-2 lg:col-span-2">No Pokémon found</p>  // Mostra un messaggio se nessun Pokémon corrisponde alla ricerca
+                    )}
+                  </div>
+                </div>
+              }
+            />
+
+            {/* Rotta per la pagina dettagliata del Pokémon */}
+            <Route path="/pokemon/:name" element={<PokemonDetail />} />
+          </Routes>
+        </main>
+      </div>
+    </Router>
   );
 }
 
