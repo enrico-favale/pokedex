@@ -1,49 +1,69 @@
 import './App.css';
 import Card from './components/Card';
-
 import { useState, useEffect } from 'react';
-import { fetchPokemonList, getIdFromUrl } from './api/pokemon';
+import { fetchPokemonList } from './api/pokemon';
 
 function App() {
-  const [pokemon, setPokemon] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [selectedPokemon, setSelectedPokemon] = useState(null);
+  const [pokemon, setPokemon] = useState([]);          // Stato per la lista completa dei Pokémon
+  const [loading, setLoading] = useState(true);        // Stato per il caricamento
+  const [filteredPokemon, setFilteredPokemon] = useState([]);  // Stato per la lista filtrata
+  const [searchQuery, setSearchQuery] = useState('');  // Stato per la query di ricerca
 
   useEffect(() => {
     const getPokemonList = async () => {
-      const data = await fetchPokemonList(151); // Recupera i primi 151 Pokémon
+      const data = await fetchPokemonList(151);  // Recupera i primi 151 Pokémon
       setPokemon(data);
+      setFilteredPokemon(data);  // Imposta la lista filtrata inizialmente uguale a tutti i Pokémon
       setLoading(false);
     };
 
     getPokemonList();
   }, []);
 
-  const handlePokemonClick = async (identifier) => {
-    // Apre scheda del pokemon con i dettagli
+  // Funzione per gestire la ricerca
+  const handleSearch = (e) => {
+    const query = e.target.value.toLowerCase();
+    setSearchQuery(query);
+
+    // Filtra i Pokémon in base alla query
+    const filtered = pokemon.filter((poke) =>
+      poke.name.toLowerCase().includes(query)  // Confronta il nome del Pokémon con la query
+    );
+    setFilteredPokemon(filtered);  // Aggiorna lo stato con i Pokémon filtrati
   };
 
-  if (loading) return;
+  if (loading) return <p>Loading...</p>;
 
   return (
-
-    <div className='font-mono bg-bg_main text-txt_main'>
-
+    <div className='font-mono bg-bg_main text-txt_main min-h-screen'>
       <header className='items-center flex justify-center p-6'>
         <img src='white-pokeball.png' alt='pokeball' className='' />
-        <p className='text-5xl font-bold'>
-          Pokedex
-        </p>
+        <p className='text-5xl font-bold'>Pokedex</p>
       </header>
 
       <main className='container mx-auto px-4'>
+        {/* Barra di ricerca */}
+        <div className='mb-8 flex justify-center'>
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={handleSearch}  // Assegna la funzione di ricerca
+            placeholder="Search for a Pokemon..."
+            className="w-full max-w-lg px-2 py-1 text-center border-b-2 border-txt_secondary bg-inherit focus:outline-none focus:border-txt_main focus:text-txt_main"
+          />
+        </div>
+
+        {/* Griglia di carte */}
         <div className='grid place-content-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4'>
-          {pokemon.map((poke) => (
-            <Card key={poke.name} pokemon={poke} />
-          ))}
+          {filteredPokemon.length > 0 ? (
+            filteredPokemon.map((poke) => (
+              <Card key={poke.name} pokemon={poke} />
+            ))
+          ) : (
+            <p className="text-center sm:col-span-2 md:col-span-2 lg:col-start-2 lg:col-span-2">No Pokémon found</p>  // Mostra un messaggio se nessun Pokémon corrisponde alla ricerca
+          )}
         </div>
       </main>
-
     </div>
   );
 }
