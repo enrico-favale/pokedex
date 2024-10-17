@@ -27,7 +27,7 @@ function App() {
 
   return (
 
-    <div className='font-courier bg-red-800 min-h-screen text-gray-100 '>
+    <div className='font-mono bg-bg_main text-txt_main'>
 
       <header className='items-center flex justify-center p-6'>
         <img src='white-pokeball.png' alt='pokeball' className='' />

@@ -12,7 +12,7 @@ const Card = ({ pokemon }) => {
 
   return (
     <div
-      className='bg-gray-100 text-black p-4 rounded-lg transition-transform duration-300 cursor-pointer max-w-xs flex flex-col items-center hover:scale-105'
+      className='p-4 border-l-2 border-b-2 border-txt_secondary text-txt_secondary rounded-bl-lg transition-transform duration-300 cursor-pointer max-w-xs flex flex-col items-center hover:scale-105 hover:border-txt_main hover:text-txt_main'
       onMouseEnter={() => setIsHovered(true)}  // Imposta lo stato su true quando il mouse entra
       onMouseLeave={() => setIsHovered(false)} // Imposta lo stato su false quando il mouse esce
     >
