@@ -15,6 +15,7 @@ const PokemonDetail = () => {
     };
 
     getPokemonDetails();
+    console.log(pokemon);
   }, [name]);
 
   if (loading) return <p>Loading...</p>;

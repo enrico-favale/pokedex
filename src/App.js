@@ -14,7 +14,7 @@ function App() {
 
   useEffect(() => {
     const getPokemonList = async () => {
-      const data = await fetchPokemonList(151);  // Recupera i primi 151 Pokémon
+      const data = await fetchPokemonList(1510);  // Recupera i primi 151 Pokémon
       setPokemon(data);
       setFilteredPokemon(data);  // Imposta la lista filtrata inizialmente uguale a tutti i Pokémon
       setLoading(false);
@@ -46,21 +46,19 @@ function App() {
         </header>
 
         <main className='container mx-auto px-4'>
-          {/* Barra di ricerca */}
-
-
           {/* Definiamo le rotte qui */}
           <Routes>
             {/* Rotta per la lista principale di Pokémon */}
             <Route
               path="/"
               element={
-                <div>
+                <>
+                  {/* Barra di ricerca */}
                   <div className='mb-8 flex justify-center'>
                     <input
                       type="text"
                       value={searchQuery}
-                      onChange={handleSearch}  // Assegna la funzione di ricerca
+                      onChange={handleSearch}
                       placeholder="Search for a Pokemon..."
                       className="w-full max-w-lg px-2 py-1 text-center border-b-2 border-txt_secondary bg-inherit focus:outline-none focus:border-txt_main focus:text-txt_main"
                     />
@@ -75,7 +73,7 @@ function App() {
                       <p className="text-center sm:col-span-2 md:col-span-2 lg:col-start-2 lg:col-span-2">No Pokémon found</p>  // Mostra un messaggio se nessun Pokémon corrisponde alla ricerca
                     )}
                   </div>
-                </div>
+                </>
               }
             />
 
