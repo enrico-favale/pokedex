@@ -14,7 +14,7 @@ function App() {
 
   useEffect(() => {
     const getPokemonList = async () => {
-      const data = await fetchPokemonList(1510);  // Recupera i primi 151 Pokémon
+      const data = await fetchPokemonList(151);  // Recupera i primi 151 Pokémon
       setPokemon(data);
       setFilteredPokemon(data);  // Imposta la lista filtrata inizialmente uguale a tutti i Pokémon
       setLoading(false);
@@ -38,7 +38,7 @@ function App() {
   if (loading) return <p>Loading...</p>;
 
   return (
-    <Router>
+    <Router basename="/pokedex">
       <div className='font-mono bg-bg_main text-txt_main min-h-screen'>
         <header className='items-center flex justify-center p-6'>
           <img src='white-pokeball.png' alt='pokeball' className='' />
