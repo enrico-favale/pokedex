@@ -7,6 +7,8 @@ import { useState, useEffect } from "react";
 import { fetchPokemonList } from "./api/pokemon";
 
 function App() {
+  const BASENAME = process.env.PUBLIC_URL;
+
   const [pokemon, setPokemon] = useState([]); // Stato per la lista completa dei Pokémons
   const [loading, setLoading] = useState(true); // Stato per il caricamento
   const [filteredPokemon, setFilteredPokemon] = useState([]); // Stato per la lista filtrata
@@ -38,11 +40,11 @@ function App() {
   if (loading) return <p>Loading...</p>;
 
   return (
-    <Router basename="/pokedex">
+    <Router basename={BASENAME}>
       <div className="font-mono bg-bg_main text-txt_main min-h-screen">
-        <header className="flex items-center justify-center p-6">
-          <img src="/white-pokeball.png" alt="pokeball" className="mr-3"/>
-          <p className="text-5xl font-bold pt-5">Pokedex</p>
+        <header className="flex flex-col items-center justify-center p-10">
+          <p className="inline-block align-middle text-4xl font-bold">Pokédex</p>
+          <img src={`${BASENAME}/white-pokeball.png`} alt="pokeball"/>
         </header>
 
         <main className="container mx-auto px-4">
