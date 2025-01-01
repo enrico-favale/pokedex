@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 import { fetchPokemonList } from './api/pokemon';
 
 function App() {
-  const [pokemon, setPokemon] = useState([]);          // Stato per la lista completa dei Pokémon
+  const [pokemon, setPokemon] = useState([]);          // Stato per la lista completa dei Pokémons
   const [loading, setLoading] = useState(true);        // Stato per il caricamento
   const [filteredPokemon, setFilteredPokemon] = useState([]);  // Stato per la lista filtrata
   const [searchQuery, setSearchQuery] = useState('');  // Stato per la query di ricerca
