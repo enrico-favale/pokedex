@@ -2,7 +2,7 @@ import "./App.css";
 import Card from "./components/Card";
 import PokemonDetail from "./components/PokemonDetail";
 
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { fetchPokemonList } from "./api/pokemon";
 
@@ -42,10 +42,14 @@ function App() {
   return (
     <Router basename={BASENAME}>
       <div className="font-mono bg-bg_main text-txt_main min-h-screen">
-        <header className="flex flex-col items-center justify-center p-10">
-          <p className="inline-block align-middle text-4xl font-bold">Pokédex</p>
-          <img src={`${BASENAME}/white-pokeball.png`} alt="pokeball"/>
-        </header>
+        <Link to="/">
+          <header className="flex flex-col items-center justify-center p-10">
+            <p className="inline-block align-middle text-4xl font-bold">
+              Pokédex
+            </p>
+            <img src={`${BASENAME}/white-pokeball.png`} alt="pokeball" />
+          </header>
+        </Link>
 
         <main className="container mx-auto px-4">
           {/* Definiamo le rotte qui */}

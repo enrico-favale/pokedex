@@ -46,46 +46,59 @@ const PokemonDetail = () => {
 
   // Mappa i colori in base ai tipi del Pokémon
   const pokeomn_types = pokemon.types.map((type) => type.type.name);
-  const gradientColors = pokeomn_types.length === 1
-  ? [typeColors[pokeomn_types[0]], typeColors[pokeomn_types[0]]] // Duplicati se un solo tipo
-  : pokeomn_types.map((type) => typeColors[type]); // Altrimenti usa tutti i colori
+  const gradientColors =
+    pokeomn_types.length === 1
+      ? [typeColors[pokeomn_types[0]], typeColors[pokeomn_types[0]]] // Duplicati se un solo tipo
+      : pokeomn_types.map((type) => typeColors[type]); // Altrimenti usa tutti i colori
 
   // Crea un gradiente lineare con i colori dei tipi
   const gradientStyle = {
     backgroundImage: `linear-gradient(to right, ${gradientColors.join(", ")})`,
-    borderRadius: '50%', // Assicurati che il bordo sia rotondo
-    padding: '6px', // Distanza tra il bordo e l'immagine
   };
 
   return (
-    <div className="flex flex-col items-center">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold capitalize">{pokemon.name}</h1>
-        <p className="text-xl text-txt_secondary">#{pokemon.id}</p>
-      </div>
+    <div className="flex flex-col border border-txt_secondary rounded-lg p-8">
+      <div className="flex flex-row justify-between mt-4">
+        <div className="">
+          <h1 className="text-4xl font-bold capitalize">{pokemon.name}</h1>
+          <p className="text-xl text-txt_secondary">#{pokemon.id}</p>
 
-      {/* Contenitore dell'immagine con il bordo rotondo e il gradiente */}
-      <div
-        className="w-48 h-48 rounded-full overflow-hidden"
-        style={gradientStyle} // Applica il gradiente e il border-radius
-      >
-        <img
-          onMouseEnter={() => setIsHovered(true)} // Imposta lo stato su true quando il mouse entra
-          onMouseLeave={() => setIsHovered(false)} // Imposta lo stato su false quando il mouse esce
-          src={
-            isHovered
-              ? pokemon.sprites.back_default
-              : pokemon.sprites.front_default
-          } // Cambia l'immagine in base allo stato
-          alt={pokemon.name}
-          className="w-full h-full object-cover rounded-full bg-bg_main" // Assicurati che l'immagine copra l'intero contenitore
-        />
-      </div>
+          <div className="mt-4">
+            <p className="text-2xl pt-3">Stats</p>
+            <p className="text-l">Height: {pokemon.height / 10} m</p>
+            <p className="text-l">Weight: {pokemon.weight / 10} kg</p>
+          </div>
+        </div>
 
-      <div>
-        <p className="text-3xl pt-3">Stats</p>
-        <p className="text-l">Height: {pokemon.height}</p>
-        <p className="text-l">Weight: {pokemon.weight}</p>
+        <div className="text-center">
+          {/* Contenitore dell'immagine con il bordo rotondo e il gradiente */}
+          <div
+            className="w-60 h-60 p-1 text-center overflow-visible rounded-full"
+            style={gradientStyle} // Applica il gradiente e il border-radius
+          >
+            <img
+              onMouseEnter={() => setIsHovered(true)} // Imposta lo stato su true quando il mouse entra
+              onMouseLeave={() => setIsHovered(false)} // Imposta lo stato su false quando il mouse esce
+              src={
+                isHovered
+                  ? pokemon.sprites.back_default
+                  : pokemon.sprites.front_default
+              } // Cambia l'immagine in base allo stato
+              alt={pokemon.name}
+              className="w-full mb-2 object-cover rounded-full bg-bg_main" // Assicurati che l'immagine copra l'intero contenitore
+            />
+          </div>
+
+          {pokemon.types.map((type) => (
+            <div
+              key={type.type.name}
+              className={`inline-block text-center align-bottom text-sm font-bold px-2 pt-2 rounded-full mr-2 mt-2`}
+              style={{ backgroundColor: typeColors[type.type.name] }}
+            >
+              <span className="inline-block text-center align-bottom">{type.type.name.toUpperCase()}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
