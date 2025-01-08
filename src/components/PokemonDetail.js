@@ -57,21 +57,30 @@ const PokemonDetail = () => {
   };
 
   return (
-    <div className="flex flex-col border border-txt_secondary rounded-lg p-8">
-      <div className="flex flex-row justify-between mt-4">
-        <div className="">
+    <div className="flex flex-col border border-txt_secondary rounded-lg p-8 md:mx-20 lg:mx-32">
+      <div className="flex flex-col items-center lg:flex-row lg:justify-between gap-20">
+
+        <div className="shrink w-full">
           <h1 className="text-4xl font-bold capitalize">{pokemon.name}</h1>
           <p className="text-xl text-txt_secondary">#{pokemon.id}</p>
 
           <div className="mt-4">
-            <p className="text-2xl pt-3">Stats</p>
-            <p className="text-l">Height: {pokemon.height / 10} m</p>
-            <p className="text-l">Weight: {pokemon.weight / 10} kg</p>
+            <p className="text-2xl border-b border-txt_secondary mb-2">Base stats</p>
+            <div className="max-w-full border-l border-txt_secondary px-2 gap-1">
+              {pokemon.stats.map((stat) => (
+                <div key={stat.stat.name} className="grid grid-cols-[minmax(180px,_auto)_minmax(30px,_auto)_1fr] justify-between mb-1 pr-2">
+                  <p className="text-l">{stat.stat.name.toUpperCase()}:</p>
+                  <p className="text-l border-r border-txt_secondary">{stat.base_stat}</p>
+                  <div className="border border-txt_secondary ml-2 m-1 rounded" style={{ width: `${(stat.base_stat / 255) * 100}%` }}></div>
+                </div>
+              ))}
+              <p className="border border-txt_secondary max-w-fit rounded p-1 mt-2">TOTAL: {pokemon.stats.reduce((total, stat) => total + stat.base_stat, 0)}</p>
+            </div>
           </div>
         </div>
 
         <div className="text-center">
-          {/* Contenitore dell'immagine con il bordo rotondo e il gradiente */}
+          {/* Contenitore dell'immagine con il bordo rotondo e il gradiente in base ai tipi del pokemon*/}
           <div
             className="w-60 h-60 p-1 text-center overflow-visible rounded-full"
             style={gradientStyle} // Applica il gradiente e il border-radius
@@ -89,10 +98,11 @@ const PokemonDetail = () => {
             />
           </div>
 
+          {/* Mostra i tipi del Pokémon sotto l'immagine assegnando un colore diverso a seconda del tipo */}
           {pokemon.types.map((type) => (
             <div
               key={type.type.name}
-              className={`inline-block text-center align-bottom text-sm font-bold px-2 pt-2 rounded-full mr-2 mt-2`}
+              className={`inline-block text-center align-bottom text-sm font-bold px-4 pt-1 rounded-full mr-2 mt-4`}
               style={{ backgroundColor: typeColors[type.type.name] }}
             >
               <span className="inline-block text-center align-bottom">{type.type.name.toUpperCase()}</span>

@@ -42,14 +42,14 @@ function App() {
   return (
     <Router basename={BASENAME}>
       <div className="font-mono bg-bg_main text-txt_main min-h-screen">
-        <Link to="/">
-          <header className="flex flex-col items-center justify-center p-10">
-            <p className="inline-block align-middle text-4xl font-bold">
+        <header className="flex flex-col items-center justify-center p-10">
+          <p className="text-4xl font-bold">
+            <Link className="flex flex-col items-center justify-center" to="/">
               Pokédex
-            </p>
-            <img src={`${BASENAME}/white-pokeball.png`} alt="pokeball" />
-          </header>
-        </Link>
+              <img src={`${BASENAME}/white-pokeball.png`} alt="pokeball" />
+            </Link>
+          </p>
+        </header>
 
         <main className="container mx-auto px-4">
           {/* Definiamo le rotte qui */}
