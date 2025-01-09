@@ -14,7 +14,7 @@ const BaseStats = ({ pokemon }) => {
             <p className="text-l border-r border-txt_secondary">
               {stat.base_stat}
             </p>
-            <div className="border border-txt_secondary w-full ml-2 m-1 rounded">
+            <div className="hidden sm:flex border border-txt_secondary w-full ml-2 m-1 rounded">
               <div
                 className="bg-txt_secondary h-full"
                 style={{ width: `${(stat.base_stat / 255) * 100}%` }}

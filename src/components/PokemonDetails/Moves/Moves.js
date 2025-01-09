@@ -36,7 +36,7 @@ const Moves = ({ pokemon, typeColors }) => {
             type: moveDetails?.type?.name || "unknown",
             damage_class: moveDetails?.damage_class?.name || "-",
             power: moveDetails?.power || "-",
-            accuracy: moveDetails?.accuracy + "%" || "-",
+            accuracy: moveDetails?.accuracy || "-",
             pp: moveDetails?.pp || "-",
             priority: moveDetails?.priority || "-",
           };
@@ -51,7 +51,7 @@ const Moves = ({ pokemon, typeColors }) => {
             type: moveDetails?.type?.name || "unknown",
             damage_class: moveDetails?.damage_class?.name || "-",
             power: moveDetails?.power || "-",
-            accuracy: moveDetails?.accuracy + "%" || "-",
+            accuracy: moveDetails?.accuracy || "-",
             pp: moveDetails?.pp || "-",
             priority: moveDetails?.priority || "-",
           };
@@ -73,11 +73,11 @@ const Moves = ({ pokemon, typeColors }) => {
 
   return (
     <div className="mt-4">
-  <p className="text-2xl font-bold border-b border-txt_secondary mb-2">
+  <p className="text-2xl font-bold lg:border-b lg:border-txt_secondary lg:mb-2">
     Moves
   </p>
 
-  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+  <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
     {/* Mosse apprese per livello */}
     <div>
       <MovesList title="Level-Up Moves" moves={levelUpMoves} typeColors={typeColors} />
