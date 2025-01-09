@@ -30,7 +30,7 @@ const EvolutionChain = ({ pokemon, typeColors }) => {
       </p>
       <div className="flex flex-col sm:flex-row sm:justify-around gap-4">
         {evolutionChain.map((evoPokemon, index) => (
-          <div className="w-30 h-30 sm:w-50 sm:w-50" key={index}>
+          <div className="w-30 h-30 sm:w-60 sm:w-60" key={index}>
               <SpriteAndTypes pokemon={evoPokemon} typeColors={typeColors} />
           </div>
         ))}
