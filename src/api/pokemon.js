@@ -53,7 +53,28 @@ export const fetchPokemonByIdOrName = async (identifier) => {
 
   } catch (error) {
     console.error(error);
+    return null;
+  }
+};
 
+/**
+ * Fetch di informazioni specifiche su una mossa.
+ * @param {string} moveName - Nome della mossa da cercare.
+ * @returns {Promise<Object>} - Dettagli completi della mossa.
+ */
+export const fetchMoveInfo = async (moveName) => {
+  try {
+    const response = await fetch(`${BASE_URL}/move/${moveName}`);
+
+    if (!response.ok) {
+      throw new Error('Errore nel recupero della mossa');
+    }
+
+    const data = await response.json();
+    return data;
+
+  } catch (error) {
+    console.error(error);
     return null;
   }
 };

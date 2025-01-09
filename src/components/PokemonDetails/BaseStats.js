@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 
 const BaseStats = ({ pokemon }) => {
   return (
     <div className="mt-4">
-      <p className="text-2xl border-b border-txt_secondary mb-2">Base stats</p>
+      <p className="text-2xl font-bold border-b border-txt_secondary mb-2">Base stats</p>
       <div className="max-w-full border-l border-txt_secondary px-2 gap-1">
         {pokemon.stats.map((stat) => (
           <div

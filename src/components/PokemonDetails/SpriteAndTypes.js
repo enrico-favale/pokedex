@@ -17,7 +17,7 @@ const SpriteAndTypes = ({ pokemon, typeColors }) => {
   };
 
   return (
-    <div className="text-center">
+    <div className="text-center mt-4 lg:mt-0">
       {/* Contenitore dell'immagine con il bordo rotondo e il gradiente in base ai tipi del pokemon*/}
       <div
         className="w-60 h-60 p-1 text-center overflow-visible rounded-full"
