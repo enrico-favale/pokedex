@@ -1,6 +1,6 @@
 import "./App.css";
 import Card from "./components/Card";
-import PokemonDetail from "./components/PokemonDetail";
+import PokemonDetail from "./views/PokemonDetail";
 
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
