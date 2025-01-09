@@ -8,12 +8,13 @@ const BaseStats = ({ pokemon }) => {
         {pokemon.stats.map((stat) => (
           <div
             key={stat.stat.name}
-            className="grid grid-cols-[minmax(180px,_auto)_minmax(40px,_auto)_1fr] justify-between mb-1 pr-2"
+            className="grid grid-cols-[minmax(180px,_auto)_1fr] sm:grid-cols-[minmax(180px,_auto)_minmax(40px,_auto)_1fr] justify-between mb-1 pr-2"
           >
             <p className="text-l">{stat.stat.name.toUpperCase()}:</p>
             <p className="text-l border-r border-txt_secondary">
               {stat.base_stat}
             </p>
+
             <div className="hidden sm:flex border border-txt_secondary w-full ml-2 m-1 rounded">
               <div
                 className="bg-txt_secondary h-full"
