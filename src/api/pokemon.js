@@ -78,3 +78,54 @@ export const fetchMoveInfo = async (moveName) => {
     return null;
   }
 };
+
+/**
+ * Funzione per recuperare la catena evolutiva di un Pokémon con oggetti completi.
+ * @param {Object} pokemon - L'oggetto Pokémon contenente i suoi dettagli.
+ * @returns {Promise<Array>} - Un array con gli oggetti di tutti i Pokémon nella catena evolutiva.
+ */
+export const fetchEvolutionChain = async (pokemon) => {
+  try {
+    // Otteniamo l'URL della specie del Pokémon
+    const speciesUrl = pokemon.species.url;
+
+    // Recuperiamo i dettagli della specie del Pokémon per ottenere l'ID della catena evolutiva
+    const speciesResponse = await fetch(speciesUrl);
+    const speciesData = await speciesResponse.json();
+
+    // Recuperiamo l'URL della catena evolutiva
+    const evolutionChainUrl = speciesData.evolution_chain.url;
+
+    // Recuperiamo i dettagli della catena evolutiva
+    const evolutionChainResponse = await fetch(evolutionChainUrl);
+    const evolutionChainData = await evolutionChainResponse.json();
+
+    // Funzione ricorsiva per raccogliere gli oggetti dei Pokémon nella catena evolutiva
+    const evolutionObjects = [];
+    
+    const collectEvolutionObjects = async (evolutionChain) => {
+      // Aggiungiamo l'oggetto del Pokémon alla lista
+      const pokemonObject = await fetchPokemonByIdOrName(evolutionChain.species.name);
+      if (pokemonObject) {
+        evolutionObjects.push(pokemonObject);
+      }
+
+      // Se ci sono evoluzioni successive, raccogliamole ricorsivamente
+      if (evolutionChain.evolves_to.length > 0) {
+        for (const evolution of evolutionChain.evolves_to) {
+          await collectEvolutionObjects(evolution);
+        }
+      }
+    };
+
+    // Iniziamo a raccogliere gli oggetti dalla catena evolutiva
+    await collectEvolutionObjects(evolutionChainData.chain);
+
+    // Restituiamo l'array con gli oggetti dei Pokémon nella catena evolutiva
+    return evolutionObjects;
+
+  } catch (error) {
+    console.error('Errore nel recupero della catena evolutiva:', error);
+    return null;
+  }
+};

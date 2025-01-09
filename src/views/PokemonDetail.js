@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { fetchPokemonByIdOrName } from "../api/pokemon";
+import { fetchEvolutionChain, fetchPokemonByIdOrName } from "../api/pokemon";
 
 import BaseStats from "../components/PokemonDetails/BaseStats";
 import SpriteAndTypes from "../components/PokemonDetails/SpriteAndTypes";
 import Moves from "../components/PokemonDetails/Moves/Moves";
-
+import EvolutionChain from "../components/PokemonDetails/EvolutionChain";
 
 // Colori per i tipi di Pokémon
 const typeColors = {
@@ -49,7 +49,6 @@ const PokemonDetail = () => {
   return (
     <div className="flex flex-col border border-txt_secondary rounded-lg p-8 md:mx-20 lg:mx-32">
       <div className="flex flex-col-reverse items-center lg:items-start lg:flex-row lg:justify-between gap-10">
-
         <div className="shrink w-full">
           <h1 className="text-4xl font-bold capitalize">{pokemon.name}</h1>
           <p className="text-xl text-txt_secondary">#{pokemon.id}</p>
@@ -57,11 +56,24 @@ const PokemonDetail = () => {
           <BaseStats key={pokemon.name + "-BaseStats"} pokemon={pokemon} />
         </div>
 
-        <div>
-          <SpriteAndTypes key={pokemon.name + "-SpriteAndTypes"} pokemon={pokemon} typeColors={typeColors} />
+        <div className="w-30 h-30 sm:w-80 sm:h-80">
+          <SpriteAndTypes
+            key={pokemon.name + "-SpriteAndTypes"}
+            pokemon={pokemon}
+            typeColors={typeColors}
+          />
         </div>
       </div>
-          <Moves key={pokemon.name + "-Moves"} pokemon={pokemon} typeColors={typeColors} />
+      <EvolutionChain
+        key={pokemon.name + "-EvolutionChain"}
+        pokemon={pokemon}
+        typeColors={typeColors}
+      />
+      <Moves
+        key={pokemon.name + "-Moves"}
+        pokemon={pokemon}
+        typeColors={typeColors}
+      />
     </div>
   );
 };
