@@ -30,7 +30,7 @@ Un'applicazione moderna per esplorare e conoscere i Pokémon. Questa Pokédex ut
 
 1. **Clona il repository**:
    ```bash
-   git clone https://github.com/tuo-utente/pokedex-app.git
+   git clone https://github.com/enrico-favale/pokedex-app.git
    cd pokedex-app
 2. **Installa le dipendenze**
    ```bash
